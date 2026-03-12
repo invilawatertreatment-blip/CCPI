@@ -51,8 +51,8 @@
         <!-- Hero Section -->
         <section class="pt-10 flex flex-col md:flex-row md:items-end justify-between gap-8 text-left">
             <div class="space-y-6">
-                <!-- GAMBAR HERO -->
-                <img src="https://raw.githubusercontent.com/invilawatertreatment-blip/invila-odometer/main/invila-treatment-unit.png" alt="Invila Unit" class="h-16 sm:h-20 w-auto object-contain self-start">
+                <!-- GAMBAR HERO DIPANGGIL RELATIF (GitHub Friendly) -->
+                <img src="invila-treatment-unit.png" alt="Invila Unit" class="h-16 sm:h-20 w-auto object-contain self-start">
                 <div class="flex items-center gap-2 text-blue-600 font-bold tracking-widest text-[10px] uppercase">
                     <div class="w-2 h-2 bg-blue-600 rounded-full animate-pulse shrink-0"></div>
                     <span>Infrastruktur Air Terpercaya, Rekam Jejak Operasional Operasional Terbukti</span>
@@ -236,6 +236,7 @@
             { id: 4, name: '5. STERILISASI & BLENDING', title: 'Penyelesaian Akhir', desc: 'Injeksi klorin dosis presisi (E. Coli = 0) dipadukan dengan pencampuran cerdas (blending 10-15%) air segar untuk mengunci TDS < 300 mg/L tanpa RO yang high Cost dan parameter air sesuai Permenkes No. 2 Tahun 2023.', result: 'Target Mutu: E. Coli 0 (Mutlak)' }
         ];
 
+        // Daftar logo sesuai nama file yang akan diupload di repository baru (GitHub Friendly)
         const logos = [
             "cemerlang-samudra-kontrindo.png",
             "kievit.png",
@@ -393,13 +394,14 @@
             });
             grid.innerHTML = projectHTML;
 
+            // AREA MODIFIKASI FINAL: Pemanggilan gambar diubah menjadi RELATIVE PATH ("src='namafile.png'")
+            // Ini akan sangat bersahabat dengan GitHub Pages karena langsung mengambil gambar dari folder yang sama.
             const lGrid = document.getElementById('logoGrid');
             let logoHTML = '';
             logos.forEach(l => {
                 logoHTML += `
                 <div class="flex justify-center items-center bg-white rounded-xl p-3 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
-                    <!-- KHUSUS UNTUK PREVIEW CANVAS INI: Memakai absolute link agar gambar bisa muncul -->
-                    <img src="https://raw.githubusercontent.com/invilawatertreatment-blip/invila-odometer/main/${l}" class="h-8 sm:h-10 w-full object-contain grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="Client Logo">
+                    <img src="${l}" class="h-8 sm:h-10 w-full object-contain transition-transform duration-300 group-hover:scale-105" alt="Logo Klien">
                 </div>`;
             });
             lGrid.innerHTML = logoHTML;
