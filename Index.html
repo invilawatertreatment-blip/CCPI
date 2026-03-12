@@ -16,33 +16,25 @@
         .odometer-digit { transition: all 2s ease-out; }
         .active-tab { background-color: #2563eb !important; color: white !important; border-color: #2563eb !important; box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3); }
         canvas { width: 100% !important; height: 100% !important; }
-        
-        /* Chat UI Styles */
-        #chat-window { transform: translateY(100%); transition: transform 0.3s ease-in-out; }
-        #chat-window.open { transform: translateY(0); }
-        .chat-bubble-ai { background: #f1f5f9; border-radius: 12px 12px 12px 0; color: #1e293b; }
-        .chat-bubble-user { background: #2563eb; border-radius: 12px 12px 0 12px; color: white; align-self: flex-end; }
-        .dot-pulse { animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
 
-        /* WhatsApp Floating Style - Updated to "Konsultasi Gratis" Small Style */
+        /* WhatsApp Floating Style - Updated to be the primary button at bottom right */
         .wa-float {
             position: fixed;
-            bottom: 95px; /* Posisinya tepat di atas tombol Chat AI */
+            bottom: 24px; /* Posisi diturunkan ke pojok bawah karena Chat AI dihapus */
             right: 24px;
-            background-color: #00a884; /* Hijau WhatsApp sesuai gambar */
+            background-color: #00a884; 
             color: white;
-            border-radius: 9999px; /* Pill shape */
+            border-radius: 9999px; 
             text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 168, 132, 0.2);
+            box-shadow: 0 8px 20px rgba(0, 168, 132, 0.3);
             z-index: 100;
             display: flex;
             align-items: center;
-            padding: 6px 14px; /* Diperkecil 50% */
+            padding: 8px 18px;
             gap: 6px;
             transition: all 0.3s ease;
             text-decoration: none;
-            font-size: 11px; /* Font diperkecil */
+            font-size: 12px;
             font-weight: 700;
         }
         .wa-float:hover {
@@ -50,7 +42,7 @@
             background-color: #008f72;
         }
         @media (max-width: 640px) {
-            .wa-float { bottom: 90px; right: 16px; padding: 5px 12px; font-size: 10px; }
+            .wa-float { bottom: 16px; right: 16px; padding: 6px 14px; font-size: 11px; }
         }
     </style>
 </head>
@@ -204,37 +196,12 @@
 
     </main>
 
-    <!-- Floating WhatsApp Button - Updated to Small Pill "Konsultasi Gratis" -->
+    <!-- Floating WhatsApp Button - Konsultasi Gratis Small Style -->
     <a href="https://wa.me/6285219493322?text=Halo%20Invila%2C%20saya%20ingin%20Konsultasi%20Gratis%20mengenai%20skema%20Zero-CAPEX%20untuk%20optimasi%20air%20di%20PT%20CPI%20Salatiga." 
        target="_blank" 
        class="wa-float">
         <span>Konsultasi Gratis</span>
     </a>
-
-    <!-- Floating Chat Widget -->
-    <div class="fixed bottom-4 sm:bottom-6 right-4 sm:right-6 z-50 flex flex-col items-end">
-        <div id="chat-window" class="bg-white w-[350px] max-w-[calc(100vw-2rem)] h-[500px] max-h-[75vh] shadow-2xl rounded-2xl border border-slate-200 mb-4 overflow-hidden flex flex-col hidden">
-            <div class="bg-blue-600 p-4 text-white flex justify-between items-center shrink-0">
-                <div class="flex items-center gap-2">
-                    <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                    <span class="font-bold text-sm">Virtual Consultant AI</span>
-                </div>
-                <button onclick="toggleChat()" class="hover:bg-blue-700 p-1 rounded transition-colors"><i data-lucide="x" size="18"></i></button>
-            </div>
-            <div id="chat-messages" class="flex-grow p-4 overflow-y-auto space-y-4 flex flex-col text-sm bg-slate-50">
-                <div class="chat-bubble-ai p-3 max-w-[85%]">
-                    Halo! Saya asisten virtual Invila™. Ada yang bisa saya bantu jelaskan mengenai dashboard efisiensi atau teknologi Aero-Pulse kami?
-                </div>
-            </div>
-            <div class="p-3 border-t border-slate-100 flex gap-2 bg-white">
-                <input type="text" id="chat-input" placeholder="Tanyakan sesuatu..." class="flex-grow border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500">
-                <button onclick="sendMessage()" class="bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 transition-colors"><i data-lucide="send" size="18"></i></button>
-            </div>
-        </div>
-        <button onclick="toggleChat()" class="bg-blue-600 text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform active:scale-95 flex items-center justify-center">
-            <i data-lucide="message-square" id="chat-icon"></i>
-        </button>
-    </div>
 
     <!-- Footer -->
     <footer class="mt-20 pt-20 pb-16 bg-slate-950 text-center space-y-16 border-t border-slate-900">
@@ -283,27 +250,6 @@
         let finChart, scadaChart;
 
         function formatIDN(num) { return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); }
-
-        function toggleChat() {
-            const win = document.getElementById('chat-window');
-            win.classList.toggle('hidden');
-            setTimeout(() => win.classList.toggle('open'), 10);
-        }
-
-        async function sendMessage() {
-            const input = document.getElementById('chat-input');
-            const msg = input.value.trim();
-            if (!msg) return;
-            const container = document.getElementById('chat-messages');
-            container.innerHTML += `<div class="chat-bubble-user p-3 max-w-[85%]">${msg}</div>`;
-            input.value = "";
-            container.scrollTop = container.scrollHeight;
-            
-            setTimeout(() => {
-                container.innerHTML += `<div class="chat-bubble-ai p-3 max-w-[85%]">Terima kasih atas pertanyaannya. Sebagai ahli dari Invila, kami merekomendasikan skema Zero-CAPEX untuk efisiensi maksimal di PT CPI Salatiga.</div>`;
-                container.scrollTop = container.scrollHeight;
-            }, 1000);
-        }
 
         function initCharts() {
             const finCtx = document.getElementById('financialChart').getContext('2d');
@@ -440,8 +386,6 @@
             setPhase(0); 
             restartAnimations(); 
             lucide.createIcons();
-            
-            document.getElementById('chat-input').addEventListener('keypress', (e) => { if(e.key === 'Enter') sendMessage(); });
         };
     </script>
 </body>
