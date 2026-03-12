@@ -55,7 +55,7 @@
                 <img src="invila-treatment-unit.png" alt="Invila Unit" class="h-16 sm:h-20 w-auto object-contain self-start">
                 <div class="flex items-center gap-2 text-blue-600 font-bold tracking-widest text-[10px] uppercase">
                     <div class="w-2 h-2 bg-blue-600 rounded-full animate-pulse shrink-0"></div>
-                    <span>Infrastruktur Air Terpercaya, Rekam Jejak Operasional Operasional Terbukti</span>
+                    <span>Infrastruktur Air Terpercaya, Rekam Jejak Operasional Terbukti</span>
                 </div>
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 leading-tight">
                     Water-as-a-Service untuk Infrastruktur Air Bersih Tanpa CAPEX <br/>
@@ -199,18 +199,18 @@
         </button>
     </div>
 
-    <!-- Footer & Pemindahan Logo -->
-    <footer class="mt-20 pt-20 pb-16 bg-slate-950 text-center space-y-16 border-t border-slate-900">
+    <!-- Footer & Pemindahan Logo (Diperketat Spasinya) -->
+    <footer class="mt-12 pt-10 pb-10 bg-slate-950 text-center space-y-8 border-t border-slate-900">
         
-        <div class="space-y-6">
+        <div class="space-y-3">
             <div class="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center text-white font-black text-2xl shadow-lg mx-auto">I</div>
             <p class="text-slate-400 font-bold uppercase tracking-widest text-[10px]">Engineering by Invila Engineering Systems</p>
             <p class="text-slate-600 text-[10px] px-8 max-w-2xl mx-auto leading-relaxed italic">Disclaimer: Draf analisis strategis untuk kepentingan internal PT Charoen Pokphand Indonesia.</p>
         </div>
-
         <div class="space-y-8 max-w-7xl mx-auto pt-8 border-t border-slate-900/50">
             <h4 class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.5em] text-center">Mitra Industri Strategis</h4>
-            <div id="logoGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-4 sm:gap-6 items-center px-4 sm:px-6"></div>
+            <!-- Grid kolom dikurangi menjadi maksimal 5 agar logo memiliki ruang untuk tampil lebih besar -->
+            <div id="logoGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6 items-center px-4 sm:px-6 max-w-6xl mx-auto"></div>
         </div>
 
     </footer>
@@ -400,8 +400,10 @@
             let logoHTML = '';
             logos.forEach(l => {
                 logoHTML += `
-                <div class="flex justify-center items-center bg-white rounded-xl p-3 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
-                    <img src="${l}" class="h-8 sm:h-10 w-full object-contain grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" alt="Logo Klien">
+                <!-- Hover effect dihapus sepenuhnya (Fix), Padding dalam diperbesar menjadi p-6 -->
+                <div class="flex justify-center items-center bg-white rounded-xl p-4 sm:p-6 shadow-md">
+                    <!-- Ukuran tinggi logo (h) digandakan secara masif agar jauh lebih besar -->
+                    <img src="${l}" class="h-16 sm:h-20 lg:h-24 w-full object-contain" alt="Logo Klien">
                 </div>`;
             });
             lGrid.innerHTML = logoHTML;
